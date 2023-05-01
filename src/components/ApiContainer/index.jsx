@@ -18,7 +18,23 @@ const ApiContainer = () => {
           console.log(e);
         });
     };
-    submit();
+    const payload = {
+      prompt: "gray colored",
+      steps: 30,
+    };
+    fetch(url, {
+      method: "POST",
+      body: JSON.stringify(payload),
+      mode: "no-cors",
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        const image = data.images[0];
+        console.log(image);
+        // Do something with the image...
+      })
+      .catch((error) => console.error(error));
+    // submit();
   });
   return (
     <div className="w-[100%] flex items-center flex-col justify-center">
