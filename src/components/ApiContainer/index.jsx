@@ -9,6 +9,13 @@ const ApiContainer = () => {
   const [loading, setLoading] = useState(false);
 
   React.useEffect(() => {
+    const catchAnother = () => {
+      const url = "https://localhost:8080/feed/posts";
+      axios.get(url).then((e) => {
+        console.log(e, "come on get it!!");
+      });
+    };
+    catchAnother();
     const catchIt = () => {
       setLoading(true);
       const url =
@@ -32,17 +39,22 @@ const ApiContainer = () => {
         .then((response) => {
           console.log(response.data);
           const image = response.data.images[0];
-          const imageBytes = atob(image);
+          const imageBytes = window.atob(image);
           const imageData = new Uint8Array(imageBytes.length);
           for (let i = 0; i < imageBytes.length; i++) {
             imageData[i] = imageBytes.charCodeAt(i);
           }
           const blob = new Blob([imageData], { type: "image/png" });
           const imageUrl = URL.createObjectURL(blob);
+          console.log(imageUrl);
           const img = new Image();
           img.onload = () => {
             URL.revokeObjectURL(imageUrl);
+            console.log(imageUrl);
           };
+          fetch(imageUrl).then((e) => {
+            console.log(e, "pleaeefa");
+          });
           img.src = imageUrl;
           console.log(img);
           console.log(imageUrl);
