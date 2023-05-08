@@ -15,7 +15,6 @@ const CloudContainer = ({ base }) => {
     const uniqueId = `${timestamp}-${randomNumber}`; // Combine timestamp and random number
     return uniqueId;
   }
-  console.log(generateUniqueId());
   const catchIt1 = (e) => {
     const formDate = new FormData();
     formDate.append("title", e);
@@ -27,17 +26,16 @@ const CloudContainer = ({ base }) => {
         "Content-Type": "application/json",
       },
     };
-    const url = "http://localhost:8080/feed/post";
-    console.log(e, requestData);
+    // const url = "http://localhost:8080/feed/post";
+    const url= "http://15.237.108.221:8080/feed/post"
     axios.post(url, requestData, config).then((e) => {
       setLink(e.data.post.image);
     });
   };
-  console.log(link);
   React.useEffect(() => {
     if (check) {
       if (base.length !== 0) {
-        setLoading(true);
+        setLoading(true); 
         catchIt1(base);
         setLoading(false);
       }

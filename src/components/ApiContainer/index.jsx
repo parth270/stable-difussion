@@ -17,7 +17,7 @@ const ApiContainer = () => {
         reader.readAsDataURL(blob);
         reader.onloadend = function () {
           const base64data = reader.result;
-          console.log(base64data);
+          // console.log(base64data)
           setBasee(base64data);
         };
       })
@@ -26,64 +26,108 @@ const ApiContainer = () => {
       });
   };
 
+  const catchIt1 = (e) => {
+    const formDate = new FormData();
+    formDate.append("input", e);
+
+    const requestData = formDate;
+    const config = {
+      headers: {
+        accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    };
+    // const url = "http://localhost:8080/feed/posts";
+    const url= "http://15.237.108.221:8080/feed/posts"
+    console.log(url)
+    axios
+      .post(url, requestData, config)
+      .then((response) => {
+        const image = response.data.base;
+        console.log(image);
+        const imageBytes = window.atob(image);
+        const imageData = new Uint8Array(imageBytes.length);
+        for (let i = 0; i < imageBytes.length; i++) {
+          imageData[i] = imageBytes.charCodeAt(i);
+        }
+        const blob = new Blob([imageData], { type: "image/jpg" });
+        const imageUrl = URL.createObjectURL(blob);
+        const img = new Image();
+        img.onload = () => {
+          URL.revokeObjectURL(imageUrl);
+        };
+        img.src = imageUrl;
+        // catchAnother(image);
+        // catchIt1(image)
+
+        // catchAnother(imageUrl);
+        // setBasee(imageUrl);
+        catchAnother(imageUrl);
+        setImages(imageUrl);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
   React.useEffect(() => {
     const catchIt = () => {
       setLoading(true);
-      const url =
-        "https://i44qfg7p5z4yyn-7861.proxy.runpod.net/sdapi/v1/txt2img";
+      catchIt1(input);
 
-      const requestData = {
-        prompt: input,
-        steps: 30,
-      };
+      // const url =
+      //   "https://i44qfg7p5z4yyn-7861.proxy.runpod.net/sdapi/v1/txt2img";
 
-      const config = {
-        headers: {
-          accept: "application/json",
-          "Content-Type": "application/json",
-          mode: "no-cors",
-        },
-      };
+      // const requestData = {
+      //   prompt: input,
+      //   steps: 30,
+      // };
 
-      axios
-        .post(url, requestData, config)
-        .then((response) => {
-          console.log(response.data);
-          const image = response.data.images[0];
-          const imageBytes = window.atob(image);
-          const imageData = new Uint8Array(imageBytes.length);
-          for (let i = 0; i < imageBytes.length; i++) {
-            imageData[i] = imageBytes.charCodeAt(i);
-          }
-          const blob = new Blob([imageData], { type: "image/jpg" });
-          const imageUrl = URL.createObjectURL(blob);
-          console.log(imageUrl);
-          const img = new Image();
-          img.onload = () => {
-            URL.revokeObjectURL(imageUrl);
-            console.log(imageUrl);
-          };
-          img.src = imageUrl;
-          // catchAnother(image);
-          // catchIt1(image)
+      // const config = {
+      //   headers: {
+      //     accept: "application/json",
+      //     "Content-Type": "application/json",
+      //     mode: "no-cors",
+      //   },
+      // };
 
-          // catchAnother(imageUrl);
-          // setBasee(imageUrl);
-          catchAnother(imageUrl);
 
-          setImages(imageUrl);
-          setLoading(false);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
+      // axios
+      //   .post(url, requestData, config)
+      //   .then((response) => {
+      //     const image = response.data.images[0];
+      //     console.log(image);
+      //     const imageBytes = window.atob(image);
+      //     const imageData = new Uint8Array(imageBytes.length);
+      //     for (let i = 0; i < imageBytes.length; i++) {
+      //       imageData[i] = imageBytes.charCodeAt(i);
+      //     }
+      //     const blob = new Blob([imageData], { type: "image/jpg" });
+      //     const imageUrl = URL.createObjectURL(blob);
+      //     const img = new Image();
+      //     img.onload = () => {
+      //       URL.revokeObjectURL(imageUrl);
+      //     };
+      //     img.src = imageUrl;
+      //     // catchAnother(image);
+      //     // catchIt1(image)
+
+      //     // catchAnother(imageUrl);
+      //     // setBasee(imageUrl);
+      //     catchAnother(imageUrl);
+      //     setImages(imageUrl);
+      //     setLoading(false);
+      //   })
+      //   .catch((error) => {
+      //     console.error(error);
+      //   });
     };
     if (input.length !== 0) {
       catchIt();
     }
   }, [changing]);
 
-  console.log(basee);
   return (
     <div className="w-[100%] flex">
       <div className="w-[50%] flex items-center flex-col justify-center">
