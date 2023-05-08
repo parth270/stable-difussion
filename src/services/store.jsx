@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
-import modelReducer from './model'
+import contentReducer from './content';
 export const store = configureStore({
-  reducer: { model: modelReducer },
+  reducer: { content:contentReducer},
 });
   
