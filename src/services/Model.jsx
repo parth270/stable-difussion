@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const ModelSlice = createSlice({
-  name: "Model",
+  name: "model",
   initialState: {
     show:0
   },
