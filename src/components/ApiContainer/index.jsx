@@ -38,7 +38,7 @@ const ApiContainer = () => {
       },
     };
     // const url = "http://localhost:8080/feed/posts";
-    const url= "https://15.237.108.221:8080/feed/posts"
+    const url= "http://15.237.108.221:8080/feed/posts"
     console.log(url)
     axios
       .post(url, requestData, config)

@@ -27,7 +27,7 @@ const CloudContainer = ({ base }) => {
       },
     };
     // const url = "http://localhost:8080/feed/post";
-    const url= "https://15.237.108.221:8080/feed/post"
+    const url= "http://15.237.108.221:8080/feed/post"
     axios.post(url, requestData, config).then((e) => {
       setLink(e.data.post.image);
     });
