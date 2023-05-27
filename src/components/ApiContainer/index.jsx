@@ -28,7 +28,8 @@ const ApiContainer = () => {
 
   const catchIt1 = (e) => {
     const formDate = new FormData();
-    formDate.append("input", e);
+    console.log(e, "please check here");
+    formDate.append("prompt", e);
 
     const requestData = formDate;
     const config = {
@@ -41,6 +42,11 @@ const ApiContainer = () => {
     // const url= "http://15.237.108.221:8080/feed/posts"
     // const url = "https://0805gb8c360pcx-3000.proxy.runpod.net/sdapi/v1/txt2img";
     const url = "https://0805gb8c360pcx-3000.proxy.runpod.net/sdapi/v1/txt2img";
+    console.log({
+      url: url,
+      requestData: requestData,
+      config: config,
+    });
     axios
       .post(url, requestData, config)
       .then((response) => {
