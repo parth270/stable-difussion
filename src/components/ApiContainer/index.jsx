@@ -40,13 +40,12 @@ const ApiContainer = () => {
     // const url = "http://localhost:8080/feed/posts";
     // const url= "http://15.237.108.221:8080/feed/posts"
     // const url = "https://0805gb8c360pcx-3000.proxy.runpod.net/sdapi/v1/txt2img";
-    const url="https://web-production-57df.up.railway.app/text2image"
-    console.log(url)
+    const url = "https://0805gb8c360pcx-3000.proxy.runpod.net/sdapi/v1/txt2img";
     axios
       .post(url, requestData, config)
       .then((response) => {
+        console.log(response);
         const image = response.data.images[0];
-        console.log(image,response);
         const imageBytes = window.atob(image);
         const imageData = new Uint8Array(imageBytes.length);
         for (let i = 0; i < imageBytes.length; i++) {
@@ -93,7 +92,6 @@ const ApiContainer = () => {
       //     mode: "no-cors",
       //   },
       // };
-
 
       // axios
       //   .post(url, requestData, config)
@@ -144,6 +142,12 @@ const ApiContainer = () => {
           }}
           placeholder="Tell me about the Image you desire?"
           className="w-[400px] h-[44px] px-[10px] text-[#000] font-medium rounded-sm mt-[40px] border-[2px] outline-none border-[#222]"
+          onKeyDown={(event) => {
+            if (event.key === "Enter") {
+              // Handle the Enter key press event here
+              setChanging(!changing);
+            }
+          }}
         />
         <button
           onClick={() => {
