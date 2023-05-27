@@ -39,7 +39,8 @@ const ApiContainer = () => {
     };
     // const url = "http://localhost:8080/feed/posts";
     // const url= "http://15.237.108.221:8080/feed/posts"
-    const url = "https://0805gb8c360pcx-3000.proxy.runpod.net/sdapi/v1/txt2img";
+    // const url = "https://0805gb8c360pcx-3000.proxy.runpod.net/sdapi/v1/txt2img";
+    const url="https://web-production-57df.up.railway.app/text2image"
     console.log(url)
     axios
       .post(url, requestData, config)
