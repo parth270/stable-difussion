@@ -41,7 +41,8 @@ const ApiContainer = () => {
     // const url = "http://localhost:8080/feed/posts";
     // const url= "http://15.237.108.221:8080/feed/posts"
     // const url = "https://0805gb8c360pcx-3000.proxy.runpod.net/sdapi/v1/txt2img";
-    const url = "https://0805gb8c360pcx-3000.proxy.runpod.net/sdapi/v1/txt2img";
+    // const url = "https://0805gb8c360pcx-3000.proxy.runpod.net/sdapi/v1/txt2img";
+    const url = "https://uwleeasubw1f81-3000.proxy.runpod.net/sdapi/v1/txt2img";
     console.log({
       url: url,
       requestData: requestData,
